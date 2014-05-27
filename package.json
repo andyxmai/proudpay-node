@@ -2,6 +2,7 @@
   "name": "proudpay",
   "version": "0.0.1",
   "private": true,
+  "main": "web.js",
   "scripts": {
     "start": "node ./bin/www"
   },
