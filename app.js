@@ -9,6 +9,7 @@ var braintree = require('braintree');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+//var customerInfo = require('./routes/getCustomerInfo');
 
 var app = express();
 
@@ -36,6 +37,7 @@ app.use(logfmt.requestLogger());
 
 app.use('/', routes);
 app.use('/users', users);
+//app.use('/get_customer_info', customerInfo);
 
 // app.get("/braintree", function (req, res) {
 //   res.render("braintree.ejs");
@@ -46,9 +48,11 @@ app.use('/users', users);
 // });
 
 app.get("/get_customer_info", function(req, res) {
-  var customer_id = req.body.customer_id;
+  var url = require('url');
+  var url_parts = url.parse(req.url, true);
+  var query = url_parts.query;
   //var customer_id = 'Awl85RoF4U';
-  gateway.customer.find(customer_id, function (err, customer) {
+  gateway.customer.find(query.customer_id, function (err, customer) {
     //console.log(customer.creditCards);
     res.send(customer);
   });

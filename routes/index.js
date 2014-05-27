@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index', { title: 'ProudPay' });
+  res.render('index', { res: res });
 });
 
 module.exports = router;
