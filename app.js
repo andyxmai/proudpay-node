@@ -45,6 +45,14 @@ app.use('/users', users);
 //   res.render("braintree.ejs");
 // });
 
+app.get("/get_customer_info", function(req, res) {
+  var customer_id = req.body.customer_id;
+  //var customer_id = 'Awl85RoF4U';
+  gateway.customer.find(customer_id, function (err, customer) {
+    //console.log(customer.creditCards);
+    res.send(customer);
+  });
+});
 
 app.post("/create_transaction", function (req, res) {
   var saleRequest = {
@@ -73,6 +81,9 @@ app.post("/create_customer", function (req, res) {
       expirationYear: req.body.expiration_year,
       billingAddress: {
         postalCode: req.body.zipcode
+      },
+      options: {
+        verifyCard: true
       }
     }
   };
