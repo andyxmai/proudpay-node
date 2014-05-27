@@ -1,0 +1,41 @@
+<html>
+  <head>
+  </head>
+  <body>
+    <h1>Braintree Customer Form</h1>
+      <form action="/create_customer" method="POST" id="braintree-payment-form">
+      <h2>Customer Information</h2>
+      <p>
+        <label>First Name</label>
+        <input type="text" name="first_name" id="first_name"></input>
+      </p>
+      <p>
+        <label for="last_name">Last Name</label>
+        <input type="text" name="last_name" id="last_name"></input>
+      </p>
+      <p>
+        <label for="postal_code">Postal Code</label>
+        <input type="text" name="zipcode" id="postal_code"></input>
+      </p>
+      <h2>Credit Card</h2>
+      <p>
+        <label>Card Number</label>
+        <input type="text" size="20" autocomplete="off" data-encrypted-name="card_number" />
+      </p>
+      <p>
+        <label>CVV</label>
+        <input type="text" size="4" autocomplete="off" data-encrypted-name="cvv" />
+      </p>
+      <p>
+        <label>Expiration (MM/YYYY)</label>
+        <input type="text" size="2" data-encrypted-name="expiration_month" /> / <input type="text" size="4" data-encrypted-name="expiration_year" />
+      </p>
+      <input class="submit-button" type="submit" />
+    </form>
+    <script src="https://js.braintreegateway.com/v1/braintree.js"></script>
+    <script>
+      var braintree = Braintree.create('MIIBCgKCAQEA5qqTk8hVoGRhDUAIm8Y6k9z1YWk//wFN53jw8cFEq3jMnDKZnbHzGxnh7NFYu+O7kE8KRS1n5hzPJFESKMSHGnX4xmOCRY3EnhNGjHOStqSWziCCR595e+Xp6v6/UL8UNX2kfuPwXt23Cb0qH6c6cUK68OHkMoxNEcSYA6OkihHIESC4SQ2CGyLsP+xhReZbxMtXubtMkKSgEfwFhMxC9TW0wrA/J2GeR9UHueW/wVeEbnMHfraHAo4leEpmq3djY2RVHAohJ5TLeQzacEjdNXNgd2j7rezYf45ARy4oUIjdWJ15WEE+8V5XetPRt/4+wZcE5BB6ccUpp4jYYnTEswIDAQAB');
+      braintree.onSubmitEncryptForm('braintree-payment-form');
+    </script>
+  </body>
+</html>
