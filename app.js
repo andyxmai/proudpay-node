@@ -46,8 +46,8 @@ app.use('/users', users);
 // });
 
 app.get("/get_customer_info", function(req, res) {
-  //var customer_id = req.body.customer_id;
-  var customer_id = 'Awl85RoF4U';
+  var customer_id = req.body.customer_id;
+  //var customer_id = 'Awl85RoF4U';
   gateway.customer.find(customer_id, function (err, customer) {
     //console.log(customer.creditCards);
     res.send(customer);
