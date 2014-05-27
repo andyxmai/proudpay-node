@@ -30,6 +30,7 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(logfmt.requestLogger());
 
 
 app.use('/', routes);
@@ -120,6 +121,7 @@ app.use(function(err, req, res, next) {
 
 module.exports = app;
 
-var server = app.listen(process.env.PORT || 3000, function() {
-    //console.log('Listening on port %d', server.address().port);
+var port = Number(process.env.PORT || 3000);
+app.listen(port, function() {
+  console.log("Listening on " + port);
 });
