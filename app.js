@@ -39,9 +39,9 @@ app.use('/', routes);
 app.use('/users', users);
 //app.use('/get_customer_info', customerInfo);
 
-// app.get("/braintree", function (req, res) {
-//   res.render("braintree.ejs");
-// });
+app.get("/braintree", function (req, res) {
+  res.render("braintree.ejs");
+});
 
 // app.get("/addcard", function (req, res) {
 //   res.render("braintree.ejs");
@@ -100,6 +100,27 @@ app.post("/create_customer", function (req, res) {
     // } else {
     //   res.send({"error":result.message});
     // }
+  });
+});
+
+app.post("/add_card", function (req, res) {
+  var newCard = {
+    customerId: req.body.customer_id,
+    number: req.body.card_number,
+    cvv: req.body.cvv,
+    expirationMonth: req.body.expiration_month,
+    expirationYear: req.body.expiration_year,
+    billingAddress: {
+      postalCode: req.body.zipcode
+    },
+    options: {
+      verifyCard: true,
+      makeDefault: true
+    }
+  };
+  gateway.creditCard.create(newCard, function (err, result) {
+    console.log(result);
+    res.send(result);
   });
 });
 
