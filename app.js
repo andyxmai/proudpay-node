@@ -125,9 +125,12 @@ app.post("/add_card", function (req, res) {
 });
 
 app.post("/delete_card", function (req, res) {
-  gateway.creditCard.delete(req.body.card_token, function (err, result) {
-    console.log(result);
-    res.send(result);
+  gateway.creditCard.delete("86mzmw", function (err) {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send({'success':1});
+    }
   });
 });
 
