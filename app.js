@@ -124,6 +124,13 @@ app.post("/add_card", function (req, res) {
   });
 });
 
+app.post("/delete_card", function (req, res) {
+  gateway.creditCard.delete(req.body.card_token, function (err, result) {
+    console.log(result);
+    res.send(result);
+  });
+});
+
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
