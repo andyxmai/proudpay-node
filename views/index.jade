@@ -1,5 +1,151 @@
-extends layout
+doctype html
+html
+	head
+		title ProudPay
+		link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Oleo+Script')
+		link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600')
+		link(rel='stylesheet', href='/bootstrap/css/bootstrap.min.css')
+		link(rel='stylesheet', href='/font-awesome/css/font-awesome.min.css')
+		link(rel='stylesheet', href='/stylesheets/form-elements.css')
+		link(rel='stylesheet', href='/stylesheets/buttons.css')
+		link(rel='stylesheet', href='/ultimate-flat-social-icons/ultm-css/ultm-general.css')
+		link(rel='stylesheet', href='/ultimate-flat-social-icons/ultm-css/ultm-sizes.css')
+		link(rel='stylesheet', href='/ultimate-flat-social-icons/ultm-css/ultm-shapes.css')
+		link(rel='stylesheet', href='/ultimate-flat-social-icons/ultm-css/ultm-bg-colors.css')
+		link(rel='stylesheet', href='/ultimate-flat-social-icons/ultm-css/ultm-bg-images-48.css')
+		link(rel='stylesheet', href='/ultimate-flat-social-icons/ultm-css/ultm-effects.css')
+		link(rel='stylesheet', href='/stylesheets/style.css')
+		link(rel='stylesheet', href='/stylesheets/media-queries.css')
 
-block content
-  h1= title
-  p The future of mobile payments is here
+		link(rel='shortcut icon', href='/ico/favicon.png')
+
+		
+	body
+		nav
+			a.menu-top(href="#top_id") Top
+			a.menu-features(href="#features_id") Features
+			a.menu-download(href="#download_id") Downloads
+			div.hide-menu
+				a(rel="tooltip", data-placement="bottom", data-original-title="Hide menu")
+					i(class="fa fa-bars")
+
+		div.show-menu
+			a(rel="tooltip", data-placement="bottom", data-original-title="Show menu")
+				i(class="fa fa-bars")
+
+		div.top-content#top_id
+			div.inner-bg
+				div.container
+					div.row
+						div.col-sm-5.phone
+							img(src="/images/iphone-1.png")
+						div.col-sm-7.text
+							div.logo
+								h1
+									a ProudPay - The Future of Payments
+							h2 ProudPay is now ready
+							div.description.
+															We have been working very hard to enhance your transaction experience with merchants. Check it out!
+							div.top-button
+								a.button-1(href="#")
+									i.fa.fa-apple  Get it now
+							div.top-arrow
+								i.fa.fa-chevron-down
+
+		div.features-container#features_id
+			div.container
+				div.row
+					div.col-sm-12.features
+						h3 Main features
+						p.
+							ProudPay allows you to connect with merchants and pay with your phone. When you are 
+							ready to checkout, say your name, confirm the transaction, and you are good to go!
+				div.row
+					div.col-sm-4.features-box-1
+						div.features-box-1-icon
+							i.fa.fa-mobile
+						h4 Mobile
+						p.
+							Pay any merchant without the hassle of taking out your wallet, signing receipts, or counting coins
+					
+					div.col-sm-4.features-box-1
+						div.features-box-1-icon
+							i.fa.fa-lightbulb-o
+						h4 Battery Efficient
+						p.
+							Open the app only when you checkout. Communication with merchants are done using Bluetooth Low Energy. 
+					
+					div.col-sm-4.features-box-1
+						div.features-box-1-icon
+							i.fa.fa-lock
+						h4 Secured
+						p.
+							All payment cards are securely stored, and transactions are powered by Braintree in the cloud.
+
+		div.single-feature-container.single-feature-bg
+		//
+			div.container
+				div.row
+					div.col-sm-12.single-feature-text
+						h3 Easy to use
+						p.
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
+
+				div.row
+					div.col-sm-12.single-feature-img
+						img(src="images/iphone-2.png")
+
+		div.single-feature-container.feature
+		//
+			div.container
+				div.row
+					div.col-sm-12.single-feature-text
+						h3 Responsive Layout
+						p.
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
+
+				div.row
+					div.col-sm-12.single-feature-img
+						img(src="images/iphone-3.png")
+
+		div.single-feature-container.single-feature-bg
+		//
+			div.container
+				div.row
+					div.col-sm-12.single-feature-text
+						h3 Flat Design
+						p.
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
+
+				div.row
+					div.col-sm-12.single-feature-img
+						img(src="images/iphone-2.png")
+
+		div.call-to-action-container#download_id
+			div.container
+				div.row
+					div.col-sm-12.call-to-action-text
+						h3 Download it now
+					p.
+						ProudPay requires iPhone 4S and later phones as well as iOS 7.0+
+					div.call-to-action-button
+						a.button-2(href="#")
+							i.fa.fa-mobile  Get it on the App Store
+
+		footer
+			div.container
+				div.row
+					div.col-sm-7.footer-copyright
+						p &copy; ProudPay. All rights reserved.
+
+		script(src='/javascripts/jquery-1.10.2.min.js')
+		script(src='/bootstrap/js/bootstrap.min.js')
+		script(src='/javascripts/jquery.backstretch.min.js')
+		script(src='/javascripts/retina-1.1.0.min.js')
+		script(src='/javascripts/scripts.js')
+
+
+
+
+
+		
