@@ -6,6 +6,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var braintree = require('braintree');
+var nodemailer = require("nodemailer");
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -19,6 +20,15 @@ var gateway = braintree.connect({
     merchantId:   '2c389dxhtk5jkctm',
     publicKey:    'n6dbqznhvmh2cbkr',
     privateKey:   'cb4ee99fabce5fdcf88926d7a476ceae'
+});
+
+// NodeMailer
+var smtpTransport = nodemailer.createTransport("SMTP",{
+    service: "Gmail",
+    auth: {
+        user: "proudpayreceipt@gmail.com",
+        pass: "proudpay2014"
+    }
 });
 
 // view engine setup
@@ -70,7 +80,27 @@ app.post("/create_transaction", function (req, res) {
   gateway.transaction.sale(saleRequest, function (err, result) {
     console.log(result);
     res.send(result);
-    //send email
+    if (result) {
+      if (result.success) {
+        var mailOptions = {
+          from: "ProudPay <proudpayreceipt@gmail.com>", // sender address
+          to: req.body.customer_email, // list of receivers
+          subject: "You paid " + req.body.merchant + " $" + req.body.amount, // Subject line
+          text: "Thanks for using ProudPay!", // plaintext body
+        }
+
+        // send mail with defined transport object
+        smtpTransport.sendMail(mailOptions, function(error, response){
+          if(error){
+              console.log(error);
+          }else{
+              console.log("Message sent: " + response.message);
+          }
+            // if you don't want to use this transport object anymore, uncomment following line
+            //smtpTransport.close(); // shut down the connection pool, no more messages
+        });   
+      }
+    }
   });
 });
 
