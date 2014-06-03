@@ -83,6 +83,7 @@ app.post("/create_transaction", function (req, res) {
     if (result) {
       if (result.success) {
         var mailOptions = {
+          from: "ProudPay <proudpayreceipt@gmail.com>", // sender address
           to: req.body.customer_email, // list of receivers
           subject: "You paid " + req.body.merchant + " $" + req.body.amount, // Subject line
           text: "Thank you for using ProudPay!", // plaintext body
