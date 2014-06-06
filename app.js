@@ -71,7 +71,7 @@ app.get("/get_customer_info", function(req, res) {
 app.post("/create_transaction", function (req, res) {
   var saleRequest = {
     customerId: req.body.customer_id,
-    amount: req.body.amount,
+    amount: req.body.total,
     options: {
       submitForSettlement: true
     }
