@@ -17,6 +17,7 @@
     "stylus": "0.42.3",
     "ejs": "*",
     "braintree": "*",
-    "logfmt": "~1.1.2"
+    "logfmt": "~1.1.2",
+    "parse": "~1.2.17"
   }
 }

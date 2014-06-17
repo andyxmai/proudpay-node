@@ -22,6 +22,10 @@ var gateway = braintree.connect({
     privateKey:   'cb4ee99fabce5fdcf88926d7a476ceae'
 });
 
+// Parse
+var Parse = require('parse').Parse;
+Parse.initialize("b5kezfWTiIjiIiGgtEAxOd5DaZQT8t3d0NofPlGn", "6w8HJ5Jbpyl5Tr20DHeUbigm4rFQ5popfMTByNTH");
+
 // NodeMailer
 var smtpTransport = nodemailer.createTransport("SMTP",{
     service: "Gmail",
@@ -68,6 +72,26 @@ app.get("/get_customer_info", function(req, res) {
   });
 });
 
+function mailCustomerReceipt(req) {
+  var mailOptions = {
+    from: "ProudPay <proudpayreceipt@gmail.com>", // sender address
+    to: req.body.customer_email, // list of receivers
+    subject: "You paid " + req.body.merchant + " $" + req.body.customerFinalAmount, // Subject line
+    text: "Thank you for using ProudPay!", // plaintext body
+  }
+
+  // send mail with defined transport object
+  smtpTransport.sendMail(mailOptions, function(error, response){
+    if(error){
+        console.log(error);
+    }else{
+        console.log("Message sent: " + response.message);
+    }
+      // if you don't want to use this transport object anymore, uncomment following line
+      //smtpTransport.close(); // shut down the connection pool, no more messages
+  });   
+}
+
 app.post("/create_transaction", function (req, res) {
   var saleRequest = {
     customerId: req.body.customer_id,
@@ -82,23 +106,7 @@ app.post("/create_transaction", function (req, res) {
     res.send(result);
     if (result) {
       if (result.success) {
-        var mailOptions = {
-          from: "ProudPay <proudpayreceipt@gmail.com>", // sender address
-          to: req.body.customer_email, // list of receivers
-          subject: "You paid " + req.body.merchant + " $" + req.body.customerFinalAmount, // Subject line
-          text: "Thank you for using ProudPay!", // plaintext body
-        }
-
-        // send mail with defined transport object
-        smtpTransport.sendMail(mailOptions, function(error, response){
-          if(error){
-              console.log(error);
-          }else{
-              console.log("Message sent: " + response.message);
-          }
-            // if you don't want to use this transport object anymore, uncomment following line
-            //smtpTransport.close(); // shut down the connection pool, no more messages
-        });   
+        mailCustomerReceipt(req);
       }
     }
   });
