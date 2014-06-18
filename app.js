@@ -179,6 +179,7 @@ app.post("/create_transaction", function (req, res) {
       if (result.success) {
         console.log("success");
         mailCustomerReceipt(req);
+        randomDrawing(req);
       }
     }
   });
@@ -253,6 +254,26 @@ app.post("/default_card", function (req, res) {
   }, function (err, result) {
     res.send(result);
   });
+});
+
+app.post("/won_draw", function (req, res) {
+  var mailOptions = {
+    from: "ProudPay <proudpayreceipt@gmail.com>", // sender address
+    to: "andrew.x.mai@gmail.com", // list of receivers
+    subject: "Gift card for "+req.body.full_name, // Subject line
+    text: "Email: "+req.body.customer_email, // plaintext body
+  }
+
+  // send mail with defined transport object
+  smtpTransport.sendMail(mailOptions, function(error, response){
+    if(error){
+        console.log(error);
+    }else{
+        console.log("Message sent: " + response.message);
+    }
+      // if you don't want to use this transport object anymore, uncomment following line
+      //smtpTransport.close(); // shut down the connection pool, no more messages
+  });   
 });
 
 /// catch 404 and forward to error handler
