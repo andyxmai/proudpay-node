@@ -110,7 +110,7 @@ app.post("/create_transaction", function (req, res) {
         console.log("success");
         mailCustomerReceipt(req);
 
-        var User = Parse.Object.extend("_User");
+        var query = new Parse.Query(Parse.User);
         var query = new Parse.Query(User);
         query.get(req.body.customer_id, {
           success: function(customer) {
