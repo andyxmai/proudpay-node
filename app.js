@@ -107,6 +107,33 @@ app.post("/create_transaction", function (req, res) {
     if (result) {
       if (result.success) {
         mailCustomerReceipt(req);
+
+        var User = Parse.Object.extend("_User");
+        var query = new Parse.Query(User);
+        query.get(req.body.customer_id, {
+          success: function(user) {
+            // The object was retrieved successfully.
+            var cashBackFloat = parseFloat(user.get("cashBackCount"));
+            var totalFloat = parseFloat(req.body.customerFinalAmount) + cashBackFloat;
+            var currCreditFloat = parseFloat(user.get("credits"));
+            if (totalFloat > 100.00) {
+                var additionalCreditsFloat = Math.floor(totalFloat/100);
+                var newCredits = currCreditFloat+additionalCreditsFloat.toFixed(2).toString();
+                user.set("credits", newCredits);
+                var newCashBackCount = (totalFloat-(additionalCreditsFloat*100)).toFixed(2).toString();
+                user.set("cashBackCount", newCashBackCount);
+                //object[@"cashBackCount"] = [NSString stringWithFormat:@"%0.2f", totalFloat-(additionalCredits*100)];
+            } else {
+              var newCashBackCount = (cashBackFloat+parseFloat(req.body.customerFinalAmount)).toFixed(2).toString();
+              user.set("cashBackCount", newCashBackCount);
+                //object[@"cashBackCount"] = [NSString stringWithFormat:@"%0.2f", cashBackFloat + amountFloat];
+            }
+          },
+          error: function(object, error) {
+            // The object was not retrieved successfully.
+            // error is a Parse.Error with an error code and description.
+          }
+        });
       }
     }
   });
