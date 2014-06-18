@@ -132,7 +132,7 @@ app.post("/create_transaction", function (req, res) {
               var newCashBackCount = (cashBackFloat+parseFloat(req.body.customerFinalAmount)).toFixed(2).toString();
               console.log("less than 100; cashBackCount: "+newCashBackCount);
               customer.set("cashBackCount", newCashBackCount);
-              user.save(null, {
+              customer.save(null, {
                 success: function(gameScore) {
                   // Now let's update it with some new data. In this case, only cheatMode and score
                   // will get sent to the cloud. playerName hasn't changed.
