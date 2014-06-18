@@ -133,6 +133,7 @@ app.post("/create_transaction", function (req, res) {
               user.set("cashBackCount", newCashBackCount);
                 //object[@"cashBackCount"] = [NSString stringWithFormat:@"%0.2f", cashBackFloat + amountFloat];
             }
+            user.save();
           },
           error: function(object, error) {
             // The object was not retrieved successfully.
