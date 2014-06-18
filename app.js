@@ -267,9 +267,9 @@ app.post("/won_draw", function (req, res) {
   // send mail with defined transport object
   smtpTransport.sendMail(mailOptions, function(error, response){
     if(error){
-        console.log(error);
+        res.send(error);
     }else{
-        console.log("Message sent: " + response.message);
+        res.send({'success':1});
     }
       // if you don't want to use this transport object anymore, uncomment following line
       //smtpTransport.close(); // shut down the connection pool, no more messages
