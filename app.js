@@ -179,7 +179,6 @@ app.post("/create_transaction", function (req, res) {
       if (result.success) {
         console.log("success");
         mailCustomerReceipt(req);
-        randomDrawing(req);
       }
     }
   });
