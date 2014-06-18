@@ -112,11 +112,13 @@ app.post("/create_transaction", function (req, res) {
         var query = new Parse.Query(User);
         query.get(req.body.customer_id, {
           success: function(user) {
+            console.log("got user");
             // The object was retrieved successfully.
             var cashBackFloat = parseFloat(user.get("cashBackCount"));
             var totalFloat = parseFloat(req.body.customerFinalAmount) + cashBackFloat;
             var currCreditFloat = parseFloat(user.get("credits"));
             if (totalFloat > 100.00) {
+
                 var additionalCreditsFloat = Math.floor(totalFloat/100);
                 var newCredits = currCreditFloat+additionalCreditsFloat.toFixed(2).toString();
                 user.set("credits", newCredits);
@@ -132,6 +134,7 @@ app.post("/create_transaction", function (req, res) {
           error: function(object, error) {
             // The object was not retrieved successfully.
             // error is a Parse.Error with an error code and description.
+            console.log(error);
           }
         });
       }
