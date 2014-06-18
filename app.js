@@ -102,7 +102,7 @@ app.post("/create_transaction", function (req, res) {
   };
 
   gateway.transaction.sale(saleRequest, function (err, result) {
-    console.log(result);
+    //console.log(result);
     res.send(result);
     if (result) {
       if (result.success) {
