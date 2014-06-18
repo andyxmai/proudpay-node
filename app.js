@@ -123,10 +123,12 @@ app.post("/create_transaction", function (req, res) {
                 var newCredits = currCreditFloat+additionalCreditsFloat.toFixed(2).toString();
                 user.set("credits", newCredits);
                 var newCashBackCount = (totalFloat-(additionalCreditsFloat*100)).toFixed(2).toString();
+                console.log("greater than 100; cashBackCount: "+newCashBackCount);
                 user.set("cashBackCount", newCashBackCount);
                 //object[@"cashBackCount"] = [NSString stringWithFormat:@"%0.2f", totalFloat-(additionalCredits*100)];
             } else {
               var newCashBackCount = (cashBackFloat+parseFloat(req.body.customerFinalAmount)).toFixed(2).toString();
+              console.log("less than 100; cashBackCount: "+newCashBackCount);
               user.set("cashBackCount", newCashBackCount);
                 //object[@"cashBackCount"] = [NSString stringWithFormat:@"%0.2f", cashBackFloat + amountFloat];
             }
