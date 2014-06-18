@@ -106,6 +106,7 @@ app.post("/create_transaction", function (req, res) {
     res.send(result);
     if (result) {
       if (result.success) {
+        console.log("success");
         mailCustomerReceipt(req);
 
         var User = Parse.Object.extend("_User");
