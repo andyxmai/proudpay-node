@@ -93,6 +93,7 @@ function mailCustomerReceipt(req) {
 }
 
 app.post("/create_transaction", function (req, res) {
+  Parse.Cloud.useMasterKey();
   var saleRequest = {
     customerId: req.body.customer_id,
     amount: req.body.total,
