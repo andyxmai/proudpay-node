@@ -92,6 +92,76 @@ function mailCustomerReceipt(req) {
   });   
 }
 
+function cashback() {
+  var Cashback = Parse.Object.extend("Cashback");
+  var query = new Parse.Query(Cashback);
+  query.equalTo("user", {
+    __type: "Pointer",
+    className: "_User",
+    objectId: req.body.customer_id
+  });
+
+  query.first({
+    success: function(cashback) {
+      var cashBackFloat = parseFloat(cashback.get("cashbackCount"));
+      var totalFloat = parseFloat(req.body.customerFinalAmount) + cashBackFloat;
+      var currCreditFloat = parseFloat(customer.get("credits"));
+      if (totalFloat > 100.00) {
+
+          var additionalCreditsFloat = Math.floor(totalFloat/100);
+          var newCredits = currCreditFloat+additionalCreditsFloat.toFixed(2).toString();
+          customer.set("credits", newCredits);
+          var newCashBackCount = (totalFloat-(additionalCreditsFloat*100)).toFixed(2).toString();
+          console.log("greater than 100; cashBackCount: "+newCashBackCount);
+          cashback.set("cashbackCount", newCashBackCount);
+          cashback.save();
+          //object[@"cashBackCount"] = [NSString stringWithFormat:@"%0.2f", totalFloat-(additionalCredits*100)];
+      } else {
+        var newCashBackCount = (cashBackFloat+parseFloat(req.body.customerFinalAmount)).toFixed(2).toString();
+        console.log("less than 100; cashBackCount: "+newCashBackCount);
+        customer.set("cashbackCount", newCashBackCount);
+        customer.save();
+          //object[@"cashBackCount"] = [NSString stringWithFormat:@"%0.2f", cashBackFloat + amountFloat];
+      }
+    },
+    error: function() {
+    }
+  });
+
+
+  query.get(req.body.customer_id, {
+    success: function(customer) {
+      console.log("got customer");
+      // The object was retrieved successfully.
+      var cashBackFloat = parseFloat(customer.get("cashBackCount"));
+      var totalFloat = parseFloat(req.body.customerFinalAmount) + cashBackFloat;
+      var currCreditFloat = parseFloat(customer.get("credits"));
+      if (totalFloat > 100.00) {
+
+          var additionalCreditsFloat = Math.floor(totalFloat/100);
+          var newCredits = currCreditFloat+additionalCreditsFloat.toFixed(2).toString();
+          customer.set("credits", newCredits);
+          var newCashBackCount = (totalFloat-(additionalCreditsFloat*100)).toFixed(2).toString();
+          console.log("greater than 100; cashBackCount: "+newCashBackCount);
+          customer.set("cashBackCount", newCashBackCount);
+          customer.save();
+          //object[@"cashBackCount"] = [NSString stringWithFormat:@"%0.2f", totalFloat-(additionalCredits*100)];
+      } else {
+        var newCashBackCount = (cashBackFloat+parseFloat(req.body.customerFinalAmount)).toFixed(2).toString();
+        console.log("less than 100; cashBackCount: "+newCashBackCount);
+        customer.set("cashBackCount", newCashBackCount);
+        customer.save();
+          //object[@"cashBackCount"] = [NSString stringWithFormat:@"%0.2f", cashBackFloat + amountFloat];
+      }
+    },
+    error: function(object, error) {
+      // The object was not retrieved successfully.
+      // error is a Parse.Error with an error code and description.
+      console.log(error);
+    }
+  });
+}
+
 app.post("/create_transaction", function (req, res) {
   //Parse.Cloud.useMasterKey();
   var saleRequest = {
@@ -109,50 +179,6 @@ app.post("/create_transaction", function (req, res) {
       if (result.success) {
         console.log("success");
         mailCustomerReceipt(req);
-
-        var query = new Parse.Query(Parse.User);
-        query.get(req.body.customer_id, {
-          success: function(customer) {
-            console.log("got customer");
-            // The object was retrieved successfully.
-            var cashBackFloat = parseFloat(customer.get("cashBackCount"));
-            var totalFloat = parseFloat(req.body.customerFinalAmount) + cashBackFloat;
-            var currCreditFloat = parseFloat(customer.get("credits"));
-            if (totalFloat > 100.00) {
-
-                var additionalCreditsFloat = Math.floor(totalFloat/100);
-                var newCredits = currCreditFloat+additionalCreditsFloat.toFixed(2).toString();
-                customer.set("credits", newCredits);
-                var newCashBackCount = (totalFloat-(additionalCreditsFloat*100)).toFixed(2).toString();
-                console.log("greater than 100; cashBackCount: "+newCashBackCount);
-                customer.set("cashBackCount", newCashBackCount);
-                customer.save();
-                //object[@"cashBackCount"] = [NSString stringWithFormat:@"%0.2f", totalFloat-(additionalCredits*100)];
-            } else {
-              var newCashBackCount = (cashBackFloat+parseFloat(req.body.customerFinalAmount)).toFixed(2).toString();
-              console.log("less than 100; cashBackCount: "+newCashBackCount);
-              customer.set("cashBackCount", newCashBackCount);
-              customer.save(null, {
-                success: function(gameScore) {
-                  // Now let's update it with some new data. In this case, only cheatMode and score
-                  // will get sent to the cloud. playerName hasn't changed.
-                  console.log("saved");
-                },
-                error: function(myObject, error) {
-                  // The delete failed.
-                  // error is a Parse.Error with an error code and description.
-                  console.log(error);
-                }
-              });
-                //object[@"cashBackCount"] = [NSString stringWithFormat:@"%0.2f", cashBackFloat + amountFloat];
-            }
-          },
-          error: function(object, error) {
-            // The object was not retrieved successfully.
-            // error is a Parse.Error with an error code and description.
-            console.log(error);
-          }
-        });
       }
     }
   });
