@@ -112,28 +112,29 @@ app.post("/create_transaction", function (req, res) {
         var User = Parse.Object.extend("_User");
         var query = new Parse.Query(User);
         query.get(req.body.customer_id, {
-          success: function(user) {
-            console.log("got user");
+          success: function(customer) {
+            console.log("got customer");
             // The object was retrieved successfully.
-            var cashBackFloat = parseFloat(user.get("cashBackCount"));
+            var cashBackFloat = parseFloat(customer.get("cashBackCount"));
             var totalFloat = parseFloat(req.body.customerFinalAmount) + cashBackFloat;
-            var currCreditFloat = parseFloat(user.get("credits"));
+            var currCreditFloat = parseFloat(customer.get("credits"));
             if (totalFloat > 100.00) {
 
                 var additionalCreditsFloat = Math.floor(totalFloat/100);
                 var newCredits = currCreditFloat+additionalCreditsFloat.toFixed(2).toString();
-                user.set("credits", newCredits);
+                customer.set("credits", newCredits);
                 var newCashBackCount = (totalFloat-(additionalCreditsFloat*100)).toFixed(2).toString();
                 console.log("greater than 100; cashBackCount: "+newCashBackCount);
-                user.set("cashBackCount", newCashBackCount);
+                customer.set("cashBackCount", newCashBackCount);
+                customer.save();
                 //object[@"cashBackCount"] = [NSString stringWithFormat:@"%0.2f", totalFloat-(additionalCredits*100)];
             } else {
               var newCashBackCount = (cashBackFloat+parseFloat(req.body.customerFinalAmount)).toFixed(2).toString();
               console.log("less than 100; cashBackCount: "+newCashBackCount);
-              user.set("cashBackCount", newCashBackCount);
+              customer.set("cashBackCount", newCashBackCount);
+              customer.save();
                 //object[@"cashBackCount"] = [NSString stringWithFormat:@"%0.2f", cashBackFloat + amountFloat];
             }
-            user.save();
           },
           error: function(object, error) {
             // The object was not retrieved successfully.
