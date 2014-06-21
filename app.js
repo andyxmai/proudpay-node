@@ -15,6 +15,7 @@ var terms = require('./routes/terms');
 var privacy = require('./routes/privacy');
 var createTransaction = require('./routes/createTransaction');
 var getCustomerInfo = require('./routes/getCustomerInfo');
+var createBraintreeCustomer = require('./routes/createBraintreeCustomer');
 
 var app = express();
 
@@ -60,6 +61,8 @@ app.use('/terms', terms);
 app.use('/privacy', privacy);
 app.use('/create_transaction', createTransaction);
 app.use('/get_customer_info', getCustomerInfo);
+app.use('/create_customer', createBraintreeCustomer);
+
 
 app.get("/braintree", function (req, res) {
   res.render("braintree.ejs");
@@ -122,35 +125,35 @@ app.get("/braintree", function (req, res) {
 //   });
 // });
 
-app.post("/create_customer", function (req, res) {
-  var customerRequest = {
-    id: req.body.customer_id,
-    firstName: req.body.first_name,
-    lastName: req.body.last_name,
-    creditCard: {
-      number: req.body.card_number,
-      cvv: req.body.cvv,
-      expirationMonth: req.body.expiration_month,
-      expirationYear: req.body.expiration_year,
-      billingAddress: {
-        postalCode: req.body.zipcode
-      },
-      options: {
-        verifyCard: true
-      }
-    }
-  };
+// app.post("/create_customer", function (req, res) {
+//   var customerRequest = {
+//     id: req.body.customer_id,
+//     firstName: req.body.first_name,
+//     lastName: req.body.last_name,
+//     creditCard: {
+//       number: req.body.card_number,
+//       cvv: req.body.cvv,
+//       expirationMonth: req.body.expiration_month,
+//       expirationYear: req.body.expiration_year,
+//       billingAddress: {
+//         postalCode: req.body.zipcode
+//       },
+//       options: {
+//         verifyCard: true
+//       }
+//     }
+//   };
 
-  gateway.customer.create(customerRequest, function (err, result) {
-    console.log(result);
-    res.send(result);
-    // if (result.success) {
-    //   res.send({"success":1});
-    // } else {
-    //   res.send({"error":result.message});
-    // }
-  });
-});
+//   gateway.customer.create(customerRequest, function (err, result) {
+//     console.log(result);
+//     res.send(result);
+//     // if (result.success) {
+//     //   res.send({"success":1});
+//     // } else {
+//     //   res.send({"error":result.message});
+//     // }
+//   });
+// });
 
 app.post("/add_card", function (req, res) {
   var newCard = {
@@ -208,8 +211,6 @@ app.post("/won_draw", function (req, res) {
     }else{
         res.send({'success':1});
     }
-      // if you don't want to use this transport object anymore, uncomment following line
-      //smtpTransport.close(); // shut down the connection pool, no more messages
   });   
 });
 
