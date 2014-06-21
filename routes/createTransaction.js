@@ -11,6 +11,14 @@ var gateway = braintree.connect({
     privateKey:   'cb4ee99fabce5fdcf88926d7a476ceae'
 });
 
+var smtpTransport = nodemailer.createTransport("SMTP",{
+    service: "Gmail",
+    auth: {
+        user: "proudpayreceipt@gmail.com",
+        pass: "proudpay2014"
+    }
+});
+
 router.post('/', function(req, res) {
   var saleRequest = {
     customerId: req.body.customer_id,
