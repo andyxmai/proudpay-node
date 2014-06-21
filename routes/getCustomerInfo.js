@@ -13,12 +13,13 @@ var gateway = braintree.connect({
 
 /* GET home page. */
 router.get('/', function(req, res) {
-	var url_parts = url.parse(req.url, true);
-	var query = url_parts.query;
-	gateway.customer.find(query.customer_id, function (err, customer) {
-	//console.log(customer.creditCards);
-  	res.render('getCustomerInfo', { customer: customer });
-	});
+  var url_parts = url.parse(req.url, true);
+  var query = url_parts.query;
+  //var customer_id = 'Awl85RoF4U';
+  gateway.customer.find(query.customer_id, function (err, customer) {
+    //console.log(customer.creditCards);
+    res.send(customer);
+  });
 });
 
 module.exports = router;

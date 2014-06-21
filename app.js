@@ -14,6 +14,7 @@ var about = require('./routes/about');
 var terms = require('./routes/terms');
 var privacy = require('./routes/privacy');
 var createTransaction = require('./routes/createTransaction');
+var getCustomerInfo = require('./routes/getCustomerInfo');
 
 var app = express();
 
@@ -58,7 +59,7 @@ app.use('/about', about);
 app.use('/terms', terms);
 app.use('/privacy', privacy);
 app.use('/create_transaction', createTransaction);
-//app.use('/get_customer_info', customerInfo);
+app.use('/get_customer_info', getCustomerInfo);
 
 app.get("/braintree", function (req, res) {
   res.render("braintree.ejs");
@@ -68,16 +69,16 @@ app.get("/braintree", function (req, res) {
 //   res.render("braintree.ejs");
 // });
 
-app.get("/get_customer_info", function(req, res) {
-  var url = require('url');
-  var url_parts = url.parse(req.url, true);
-  var query = url_parts.query;
-  //var customer_id = 'Awl85RoF4U';
-  gateway.customer.find(query.customer_id, function (err, customer) {
-    //console.log(customer.creditCards);
-    res.send(customer);
-  });
-});
+// app.get("/get_customer_info", function(req, res) {
+//   var url = require('url');
+//   var url_parts = url.parse(req.url, true);
+//   var query = url_parts.query;
+//   //var customer_id = 'Awl85RoF4U';
+//   gateway.customer.find(query.customer_id, function (err, customer) {
+//     //console.log(customer.creditCards);
+//     res.send(customer);
+//   });
+// });
 
 // function mailCustomerReceipt(req) {
 //   var mailOptions = {
