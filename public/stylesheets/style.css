@@ -77,6 +77,14 @@ nav a:focus { color: #fff; }
 }
 .show-menu a:hover, .hide-menu a:hover { color: #fff; }
 
+.brand {
+	float: left;
+	font-size: 24px;
+}
+
+.page-container {
+	margin-top: 50px;
+}
 
 /***** Top content *****/
 
@@ -698,5 +706,14 @@ footer {
 
 .footer-social {
 	text-align: right;
+}
+
+.footer-link {
+	display: inline;
+	padding-right: 1.5em;
+}
+
+.text {
+	font-size:19px;
 }
 

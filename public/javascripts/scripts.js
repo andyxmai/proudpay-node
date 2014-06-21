@@ -15,23 +15,23 @@ jQuery(document).ready(function() {
 		$('nav').slideUp(function(){ $('.show-menu a').fadeIn(); });
 	});
 	// navigation
-	$('nav a').on('click', function(e) {
-		e.preventDefault();
-		var element_class = $(this).attr('class');
-		var scroll_to = 0;
-		var nav_height = $('nav').height();
-		if(element_class == 'menu-top') { scroll_to = $(".top-content").offset().top; }
-		else if(element_class == 'menu-features') { scroll_to = $(".features").offset().top - nav_height - 60; }
-		else if(element_class == 'menu-download') { scroll_to = $(".call-to-action-text").offset().top - nav_height - 60; }
-		else if(element_class == 'menu-subscribe') { scroll_to = $(".subscribe").offset().top - nav_height - 60; }
-		else if(element_class == 'menu-testimonials') { scroll_to = $(".testimonials").offset().top - nav_height - 60; }
-		else if(element_class == 'menu-about-us') { scroll_to = $(".whos-behind").offset().top - nav_height - 60; }
-		else if(element_class == 'menu-contact') { scroll_to = $(".contact").offset().top - nav_height - 60; }
+	// $('nav a').on('click', function(e) {
+	// 	e.preventDefault();
+	// 	var element_class = $(this).attr('class');
+	// 	var scroll_to = 0;
+	// 	var nav_height = $('nav').height();
+	// 	if(element_class == 'menu-top') { scroll_to = $(".top-content").offset().top; }
+	// 	else if(element_class == 'menu-features') { scroll_to = $(".features").offset().top - nav_height - 60; }
+	// 	else if(element_class == 'menu-download') { scroll_to = $(".call-to-action-text").offset().top - nav_height - 60; }
+	// 	else if(element_class == 'menu-subscribe') { scroll_to = $(".subscribe").offset().top - nav_height - 60; }
+	// 	else if(element_class == 'menu-testimonials') { scroll_to = $(".testimonials").offset().top - nav_height - 60; }
+	// 	else if(element_class == 'menu-about-us') { scroll_to = $(".whos-behind").offset().top - nav_height - 60; }
+	// 	else if(element_class == 'menu-contact') { scroll_to = $(".contact").offset().top - nav_height - 60; }
 		
-		if($(window).scrollTop() != scroll_to && element_class !== undefined) {
-			$('html').animate({scrollTop: scroll_to}, 1000);
-		}
-	});
+	// 	if($(window).scrollTop() != scroll_to && element_class !== undefined) {
+	// 		$('html').animate({scrollTop: scroll_to}, 1000);
+	// 	}
+	// });
 	// learn more
 	$('.top-arrow i').on('click', function() {
 		var nav_height = $('nav').height();

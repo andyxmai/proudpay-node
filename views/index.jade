@@ -21,17 +21,17 @@ html
 
 		
 	body
-		nav
+		nav(style="display:block")
+			a.brand(href="/") ProudPay
 			a.menu-top(href="#top_id") Top
 			a.menu-features(href="#features_id") Features
 			//a.menu-download(href="#download_id") Downloads
-			div.hide-menu
-				a(rel="tooltip", data-placement="bottom", data-original-title="Hide menu")
-					i(class="fa fa-bars")
+			a.menu-features(href="#contact") Contact
+			
 
-		div.show-menu
-			a(rel="tooltip", data-placement="bottom", data-original-title="Show menu")
-				i(class="fa fa-bars")
+		//div.show-menu
+		//	a(rel="tooltip", data-placement="bottom", data-original-title="Show menu")
+		//		i(class="fa fa-bars")
 
 		div.top-content#top_id
 			div.inner-bg
@@ -136,11 +136,30 @@ html
 						a.button-2(href="#")
 							i.fa.fa-mobile  Get it on the App Store
 
+		div.container#contact
+			div.row
+				div.col-sm-12.contact
+					h3 How to contact us
+			div.row
+				div.col-sm-5.contact-form
+					h4 Contact Info
+					p
+						i.fa.fa-envelope  Email: andrew.x.mai@gmail.com
+					p
+						i.fa.fa-phone  Phone: (202) 468-0722
+
+
 		footer
 			div.container
 				div.row
 					div.col-sm-7.footer-copyright
-						p &copy; ProudPay. All rights reserved.
+						p.footer-link &copy; ProudPay
+						p.footer-link 
+							a(href="/about") About
+						p.footer-link
+							a(href="/terms") Terms
+						p.footer-link
+							a(href="/privacy") Privacy
 
 		script(src='/javascripts/jquery-1.10.2.min.js')
 		script(src='/bootstrap/js/bootstrap.min.js')

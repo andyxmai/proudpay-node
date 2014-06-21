@@ -10,6 +10,9 @@ var nodemailer = require("nodemailer");
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var about = require('./routes/about');
+var terms = require('./routes/terms');
+var privacy = require('./routes/privacy');
 //var customerInfo = require('./routes/getCustomerInfo');
 
 var app = express();
@@ -51,6 +54,9 @@ app.use(logfmt.requestLogger());
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/about', about);
+app.use('/terms', terms);
+app.use('/privacy', privacy);
 //app.use('/get_customer_info', customerInfo);
 
 app.get("/braintree", function (req, res) {
