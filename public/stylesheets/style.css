@@ -711,7 +711,14 @@ footer {
 .footer-link {
 	display: inline;
 	padding-right: 1.5em;
+}
+
+.footer-link a {
 	color: white;
+}
+
+.footer-link a:hover {
+	color: #6d9bb5;
 }
 
 .text {
