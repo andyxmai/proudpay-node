@@ -14,7 +14,7 @@ var gateway = braintree.connect({
 var smtpTransport = nodemailer.createTransport("SMTP",{
     service: "Gmail",
     auth: {
-        user: "support@proudpay.com",
+        user: "admin@proudpay.com",
         pass: "proudpay2014"
     }
 });
