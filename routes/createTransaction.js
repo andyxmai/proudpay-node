@@ -41,7 +41,7 @@ router.post('/', function(req, res) {
 
 function mailCustomerReceipt(req) {
   var mailOptions = {
-    from: "ProudPay <proudpayreceipt@gmail.com>", // sender address
+    from: "ProudPay <support@proudpay.com>", // sender address
     to: req.body.customer_email, // list of receivers
     subject: "You paid " + req.body.merchant + " $" + req.body.customerFinalAmount, // Subject line
     text: "Thank you for using ProudPay!", // plaintext body
