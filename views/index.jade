@@ -23,10 +23,10 @@ html
 	body
 		nav(style="display:block")
 			a.brand(href="/") ProudPay
-			a.menu-top(href="#top_id") Top
-			a.menu-features(href="#features_id") Features
+			a.menu-top.scroll(href="#top_id") Top
+			a.menu-features.scroll(href="#features_id") Features
 			//a.menu-download(href="#download_id") Downloads
-			a.menu-features(href="#contact") Contact
+			a.menu-features.scroll(href="#contact") Contact
 			
 
 		//div.show-menu
@@ -38,9 +38,11 @@ html
 				div.container
 					div.row
 						div.col-sm-5.phone
+
 							img(src="/images/iphone-1.png")
 						div.col-sm-7.text
 							div.logo
+							//
 								h1
 									a ProudPay - The Future of Payments
 							h2 ProudPay is almost ready
@@ -52,7 +54,8 @@ html
 								a.button-1(href="#")
 									i.fa.fa-apple  Get it now
 							div.top-arrow
-								i.fa.fa-chevron-down
+								a.scroll(href="#features_id") 
+									i.fa.fa-chevron-down
 
 		div.features-container#features_id
 			div.container
