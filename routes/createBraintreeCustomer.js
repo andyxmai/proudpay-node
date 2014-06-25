@@ -4,10 +4,10 @@ var braintree = require('braintree');
 
 // Braintree 
 var gateway = braintree.connect({
-    environment:  braintree.Environment.Sandbox,
-    merchantId:   '2c389dxhtk5jkctm',
-    publicKey:    'n6dbqznhvmh2cbkr',
-    privateKey:   'cb4ee99fabce5fdcf88926d7a476ceae'
+    environment:  braintree.Environment.Production,
+    merchantId:   'sgy5fmkkbp6cw9vf',
+    publicKey:    'm8wkrtthtth9pbxj',
+    privateKey:   'be752af645ce005b989b886339066d2c'
 });
 
 /* POST home page. */
