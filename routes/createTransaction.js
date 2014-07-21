@@ -34,6 +34,7 @@ router.post('/', function(req, res) {
       if (result.success) {
         console.log("success");
         mailCustomerReceipt(req);
+        giftCardDrawing(req);
       }
     }
   });
@@ -57,6 +58,27 @@ function mailCustomerReceipt(req) {
       // if you don't want to use this transport object anymore, uncomment following line
       //smtpTransport.close(); // shut down the connection pool, no more messages
   });   
+}
+
+function giftCardDrawing(req) {
+  var randNum = Math.random();
+  if (randNum <= 1) {
+    var mailOptions = {
+      from: "ProudPay <support@proudpay.com>", // sender address
+      to: 'support@proudpay.com', // send to support email
+      subject: "Gift Card for "+req.body.customer_email, // Subject line
+      text: "Give the lucky user a gift card! User Id: "+req.body.customer_id, // plaintext body
+    }
+
+    // send mail with defined transport object
+    smtpTransport.sendMail(mailOptions, function(error, response){
+      if(error){
+          console.log(error);
+      }else{
+          console.log("Message sent: " + response.message);
+      }
+    });   
+  }
 }
 
 function cashback() {
