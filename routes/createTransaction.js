@@ -65,7 +65,7 @@ function mailCustomerReceipt(req) {
 
 function giftCardDrawing(req) {
   var randNum = Math.random();
-  if (randNum <= 1) {
+  if (randNum <= 0.05) {
     var mailOptions = {
       from: "ProudPay <support@proudpay.com>", // sender address
       to: 'support@proudpay.com', // send to support email
