@@ -37,6 +37,9 @@ router.post('/', function(req, res) {
         giftCardDrawing(req);
       }
     }
+    if (err) {
+      console.log(err);
+    }
   });
 });
 
