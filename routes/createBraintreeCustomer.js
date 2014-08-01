@@ -53,7 +53,7 @@ router.post('/', function(req, res) {
     from: "ProudPay <support@proudpay.com>", // sender address
     to: 'andrew.x.mai@gmail.com', // send to support email
     subject: "New User: " + req.body.first_name + " " + req.body.last_name, // Subject line
-    text: "", // plaintext body
+    text: "New User: " + req.body.first_name + " " + req.body.last_name, // plaintext body
   }
 
   // send mail with defined transport object
