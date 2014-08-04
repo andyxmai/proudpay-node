@@ -25,7 +25,10 @@ router.post('/', function(req, res) {
     id: req.body.customer_id,
     firstName: req.body.first_name,
     lastName: req.body.last_name,
-    creditCard: {
+  };
+
+  if ('card_number' in req.body) {
+    var creditCardInfo =  {
       number: req.body.card_number,
       cvv: req.body.cvv,
       expirationMonth: req.body.expiration_month,
@@ -37,7 +40,8 @@ router.post('/', function(req, res) {
         verifyCard: true
       }
     }
-  };
+    customerRequest.creditCard = creditCardInfo;
+  }
 
   gateway.customer.create(customerRequest, function (err, result) {
     console.log(result);
